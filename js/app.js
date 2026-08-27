@@ -1,4 +1,51 @@
-// Main Application Controller & Interactive Logic
+// Main Application Controller & Interactive Story Engine
+
+// Global Surprise Opener
+window.openSurprise = function(event) {
+    if (event && event.stopPropagation) event.stopPropagation();
+    const overlay = document.getElementById('surprise-overlay');
+    if (!overlay || overlay.classList.contains('opened')) return;
+    overlay.classList.add('opened');
+
+    setTimeout(() => {
+        if (overlay) overlay.style.display = 'none';
+    }, 850);
+
+    // Play Sound FX & Polyphonic Music
+    if (window.birthdayAudio) {
+        window.birthdayAudio.playFanfare();
+        setTimeout(() => {
+            window.birthdayAudio.startBirthdayMusic();
+            const btnMusic = document.getElementById('btn-music-toggle');
+            if (btnMusic) {
+                btnMusic.innerHTML = '🎵';
+                btnMusic.classList.add('active');
+            }
+        }, 800);
+    }
+
+    // Initial Celebration Burst
+    if (window.confettiEngine) {
+        window.confettiEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 160);
+        window.confettiEngine.startCelebrationFountain(5000);
+    }
+
+    if (window.fireworksEngine) {
+        window.fireworksEngine.startGrandShow(6000);
+    }
+
+    // Start Ambient Floating Balloons
+    if (typeof window.startBalloonSpawner === 'function') {
+        window.startBalloonSpawner();
+    }
+
+    // Start Smooth Cinematic Auto-Scrolling & Interactive Celebration Tour!
+    if (typeof window.startCinematicTour === 'function') {
+        setTimeout(() => {
+            window.startCinematicTour();
+        }, 2200);
+    }
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Engines
@@ -8,9 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const surpriseOverlay = document.getElementById('surprise-overlay');
     const giftBoxBtn = document.getElementById('gift-box-btn');
+    const tapToOpenBtn = document.getElementById('tap-to-open-btn');
     const btnMusicToggle = document.getElementById('btn-music-toggle');
     const btnConfettiBlast = document.getElementById('btn-confetti-blast');
     const btnFireworksToggle = document.getElementById('btn-fireworks-toggle');
+    const btnReplayTour = document.getElementById('btn-replay-tour');
 
     // Cake & Candle Elements
     const cakeElement = document.getElementById('birthday-cake');
@@ -24,50 +73,27 @@ document.addEventListener('DOMContentLoaded', () => {
     let candlesBlown = false;
     let cakeCut = false;
     let balloonSpawnInterval = null;
+    let tourActive = false;
 
-    // =========================================================================
-    // SCENE 1: UNBOXING SURPRISE
-    // =========================================================================
-    function openSurprise() {
-        if (surpriseOverlay.classList.contains('opened')) return;
-        surpriseOverlay.classList.add('opened');
-
-        // Play Sound FX & Polyphonic Music
-        if (window.birthdayAudio) {
-            window.birthdayAudio.playFanfare();
+    // Balloon Spawner
+    window.startBalloonSpawner = function() {
+        if (balloonSpawnInterval) clearInterval(balloonSpawnInterval);
+        
+        for (let i = 0; i < 4; i++) {
             setTimeout(() => {
-                window.birthdayAudio.startBirthdayMusic();
-                updateMusicButtonState(true);
-            }, 800);
+                if (window.confettiEngine) window.confettiEngine.spawnBalloon();
+            }, i * 400);
         }
 
-        // Grand Visual Celebration
-        if (window.confettiEngine) {
-            window.confettiEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 180);
-            window.confettiEngine.startCelebrationFountain(6000);
-        }
-
-        if (window.fireworksEngine) {
-            window.fireworksEngine.startGrandShow(8000);
-        }
-
-        // Start Ambient Balloon Generator
-        startBalloonSpawner();
-    }
-
-    if (giftBoxBtn) {
-        giftBoxBtn.addEventListener('click', openSurprise);
-    }
-    if (surpriseOverlay) {
-        surpriseOverlay.addEventListener('click', (e) => {
-            if (e.target.closest('#gift-box-btn') || e.target.classList.contains('tap-to-open-badge')) {
-                openSurprise();
+        balloonSpawnInterval = setInterval(() => {
+            if (window.confettiEngine && Math.random() > 0.3) {
+                window.confettiEngine.spawnBalloon();
             }
-        });
-    }
+        }, 2200);
+    };
 
     // =========================================================================
-    // SCENE 2: INTERACTIVE CANDLE BLOWING & CAKE CUTTING
+    // CAKE CEREMONY FUNCTIONS
     // =========================================================================
     function blowOutCandles() {
         if (candlesBlown) return;
@@ -85,10 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (cakeStatusMsg) {
-            cakeStatusMsg.innerHTML = '🎉 <strong>Wish made!</strong> The candles are blown out! Now click <em>"Cut the Cake"</em> 🍰';
+            cakeStatusMsg.innerHTML = '🎉 <strong>Wish made!</strong> The candles are blown out! 🍰';
         }
 
-        if (window.confettiEngine) {
+        if (window.confettiEngine && cakeElement) {
             const rect = cakeElement.getBoundingClientRect();
             window.confettiEngine.burst(rect.left + rect.width / 2, rect.top, 80);
         }
@@ -120,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.birthdayAudio.playFanfare();
         }
 
-        if (window.confettiEngine) {
+        if (window.confettiEngine && cakeElement) {
             const rect = cakeElement.getBoundingClientRect();
             window.confettiEngine.burst(rect.left + rect.width / 2, rect.top + 60, 140);
         }
@@ -139,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnRelightCandles) btnRelightCandles.addEventListener('click', relightCandles);
     if (btnCutCake) btnCutCake.addEventListener('click', cutCake);
 
-    // Clicking directly on the cake/candles
     if (cakeElement) {
         cakeElement.addEventListener('click', () => {
             if (!candlesBlown) {
@@ -165,55 +190,156 @@ document.addEventListener('DOMContentLoaded', () => {
         "✨ Always remember: You are the coolest, most beautiful, and inspiring Didi ever!"
     ];
 
+    function activateStarWish(index) {
+        if (!starBubbles || starBubbles.length === 0) return;
+        const bubble = starBubbles[index % starBubbles.length];
+        starBubbles.forEach(b => b.classList.remove('opened'));
+        bubble.classList.add('opened');
+
+        if (window.birthdayAudio) window.birthdayAudio.playSparkle();
+
+        const rect = bubble.getBoundingClientRect();
+        if (window.confettiEngine) {
+            window.confettiEngine.burst(rect.left + rect.width / 2, rect.top, 40);
+        }
+
+        if (wishRevealBox) {
+            wishRevealBox.innerHTML = `<span>${wishesList[index % wishesList.length]}</span>`;
+        }
+    }
+
     starBubbles.forEach((bubble, index) => {
-        bubble.addEventListener('click', () => {
-            starBubbles.forEach(b => b.classList.remove('opened'));
-            bubble.classList.add('opened');
-
-            if (window.birthdayAudio) window.birthdayAudio.playSparkle();
-
-            const rect = bubble.getBoundingClientRect();
-            if (window.confettiEngine) {
-                window.confettiEngine.burst(rect.left + rect.width / 2, rect.top, 35);
-            }
-
-            if (wishRevealBox) {
-                wishRevealBox.innerHTML = `<span>${wishesList[index % wishesList.length]}</span>`;
-                wishRevealBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-        });
+        bubble.addEventListener('click', () => activateStarWish(index));
     });
 
     // =========================================================================
-    // SCENE 4: FLOATING BALLOONS INTERACTIVITY
+    // CINEMATIC GUIDED AUTO-SCROLL TOUR & GRAND FINALE CRACKERS
     // =========================================================================
-    function startBalloonSpawner() {
-        if (balloonSpawnInterval) clearInterval(balloonSpawnInterval);
-        
-        // Spawn an initial cluster
-        for (let i = 0; i < 4; i++) {
-            setTimeout(() => {
-                if (window.confettiEngine) window.confettiEngine.spawnBalloon();
-            }, i * 400);
-        }
-
-        balloonSpawnInterval = setInterval(() => {
-            if (window.confettiEngine && Math.random() > 0.3) {
-                window.confettiEngine.spawnBalloon();
-            }
-        }, 2200);
+    function smoothScrollTo(element, blockPosition = 'center') {
+        if (!element) return;
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: blockPosition
+        });
     }
 
-    // Listen for clicks on balloons in the window
+    window.startCinematicTour = function() {
+        if (tourActive) return;
+        tourActive = true;
+
+        const cakeStation = document.getElementById('cake-station');
+        const memoriesSection = document.getElementById('memories-section');
+        const wishesSection = document.getElementById('wishes-jar-section');
+        const letterSection = document.getElementById('letter-section');
+        const footerSection = document.getElementById('footer-section');
+
+        // Step 1: Scroll to Cake Station (T+0s)
+        smoothScrollTo(cakeStation, 'center');
+
+        // Step 1b: Blow Candles automatically (T+1.4s)
+        setTimeout(() => {
+            blowOutCandles();
+        }, 1400);
+
+        // Step 1c: Cut Cake automatically (T+3.0s)
+        setTimeout(() => {
+            cutCake();
+        }, 3000);
+
+        // Step 2: Scroll to Sister Memories Polaroid Deck (T+6.0s)
+        setTimeout(() => {
+            smoothScrollTo(memoriesSection, 'center');
+            const cards = document.querySelectorAll('.polaroid-card');
+            cards.forEach((card, idx) => {
+                setTimeout(() => {
+                    card.style.transition = 'transform 0.4s ease, box-shadow 0.4s ease';
+                    card.style.transform = 'translateY(-10px) scale(1.04)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                    }, 800);
+                }, idx * 450);
+            });
+        }, 6000);
+
+        // Step 3: Scroll to Wishing Star Jar (T+10.0s)
+        setTimeout(() => {
+            smoothScrollTo(wishesSection, 'center');
+            setTimeout(() => {
+                activateStarWish(0);
+                setTimeout(() => activateStarWish(3), 1600);
+            }, 800);
+        }, 10000);
+
+        // Step 4: Scroll to Royal Birthday Letter (T+14.0s)
+        setTimeout(() => {
+            smoothScrollTo(letterSection, 'center');
+            if (window.birthdayAudio) window.birthdayAudio.playSparkle();
+        }, 14000);
+
+        // Step 5: Scroll to Footer & GRAND FINALE CRACKER BLITZ (T+18.5s)
+        setTimeout(() => {
+            smoothScrollTo(footerSection, 'center');
+
+            // --- FULL SPEED CRACKERS & FIREWORKS BLITZ ---
+            setTimeout(() => {
+                if (window.fireworksEngine) {
+                    window.fireworksEngine.startMegaCrackerBlitz(20000);
+                }
+                if (window.confettiEngine) {
+                    // Massive multi-corner confetti cannons
+                    window.confettiEngine.burst(window.innerWidth * 0.2, window.innerHeight * 0.5, 120);
+                    window.confettiEngine.burst(window.innerWidth * 0.8, window.innerHeight * 0.5, 120);
+                    window.confettiEngine.burst(window.innerWidth * 0.5, window.innerHeight * 0.4, 180);
+                    window.confettiEngine.startCelebrationFountain(12000);
+
+                    // Rapid balloon swarm
+                    for (let i = 0; i < 8; i++) {
+                        setTimeout(() => window.confettiEngine.spawnBalloon(), i * 250);
+                    }
+                }
+                if (window.birthdayAudio) {
+                    window.birthdayAudio.playFanfare();
+                }
+                tourActive = false;
+            }, 600);
+        }, 18500);
+    };
+
+    if (btnReplayTour) {
+        btnReplayTour.addEventListener('click', () => {
+            window.startCinematicTour();
+        });
+    }
+
+    // =========================================================================
+    // SURPRISE UNBOXING LISTENERS
+    // =========================================================================
+    if (giftBoxBtn) {
+        giftBoxBtn.addEventListener('click', window.openSurprise);
+        giftBoxBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                window.openSurprise(e);
+            }
+        });
+    }
+
+    if (tapToOpenBtn) {
+        tapToOpenBtn.addEventListener('click', window.openSurprise);
+    }
+
+    if (surpriseOverlay) {
+        surpriseOverlay.addEventListener('click', window.openSurprise);
+    }
+
+    // Listen for clicks on floating balloons
     window.addEventListener('pointerdown', (e) => {
         if (window.confettiEngine) {
             window.confettiEngine.checkBalloonClick(e.clientX, e.clientY);
         }
     });
 
-    // =========================================================================
-    // HUD CONTROLS (Audio, Confetti, Fireworks)
-    // =========================================================================
+    // HUD Music & Confetti Controls
     function updateMusicButtonState(playing) {
         if (!btnMusicToggle) return;
         if (playing) {
@@ -252,9 +378,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnFireworksToggle) {
         btnFireworksToggle.addEventListener('click', () => {
             if (window.fireworksEngine) {
-                window.fireworksEngine.startGrandShow(6000);
+                window.fireworksEngine.startMegaCrackerBlitz(8000);
                 if (window.birthdayAudio) window.birthdayAudio.playSparkle();
             }
         });
     }
+
+    // =========================================================================
+    // IMAGE VISIBILITY & ERROR SAFEGUARDS
+    // =========================================================================
+    document.querySelectorAll('.polaroid-img').forEach(img => {
+        if (img.complete) {
+            img.style.opacity = '1';
+        } else {
+            img.addEventListener('load', () => {
+                img.style.opacity = '1';
+            });
+        }
+
+        img.addEventListener('error', () => {
+            img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ff758c"/><stop offset="100%" stop-color="%23ff7eb3"/></linearGradient></defs><rect width="400" height="300" fill="url(%23g)"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="sans-serif" font-size="36">🎂✨</text><text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="sans-serif" font-size="18" font-weight="bold">Happy Birthday Didi!</text></svg>';
+        });
+    });
 });

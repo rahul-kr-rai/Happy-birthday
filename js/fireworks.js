@@ -66,6 +66,44 @@ class FireworksEngine {
         }
     }
 
+    // Full Speed Mega Cracker & Fireworks Blitz for Grand Finale
+    startMegaCrackerBlitz(durationMs = 15000) {
+        if (this.autoLaunchInterval) clearInterval(this.autoLaunchInterval);
+        
+        // Immediate massive barrage
+        for (let i = 0; i < 6; i++) {
+            setTimeout(() => {
+                const x = (this.canvas.width / 6) * i + (Math.random() * 60 - 30);
+                this.launch(x, x, Math.random() * (this.canvas.height * 0.4) + 50);
+            }, i * 150);
+        }
+
+        // Rapid continuous volley
+        this.autoLaunchInterval = setInterval(() => {
+            const startX = Math.random() * this.canvas.width;
+            const targetX = Math.random() * (this.canvas.width - 100) + 50;
+            const targetY = Math.random() * (this.canvas.height * 0.5) + 40;
+            this.launch(startX, targetX, targetY);
+
+            // Double launch random crackers
+            if (Math.random() > 0.3) {
+                const startX2 = Math.random() * this.canvas.width;
+                setTimeout(() => {
+                    this.launch(startX2, startX2, Math.random() * (this.canvas.height * 0.45) + 60);
+                }, 120);
+            }
+        }, 320);
+
+        if (durationMs > 0) {
+            setTimeout(() => {
+                if (this.autoLaunchInterval) {
+                    clearInterval(this.autoLaunchInterval);
+                    this.autoLaunchInterval = null;
+                }
+            }, durationMs);
+        }
+    }
+
     startGrandShow(durationMs = 8000) {
         if (this.autoLaunchInterval) clearInterval(this.autoLaunchInterval);
         

@@ -35,12 +35,12 @@
     <!-- ===================================================================
          SCENE 0: SURPRISE UNBOXING ENTRANCE OVERLAY
          =================================================================== -->
-    <div id="surprise-overlay" class="surprise-overlay">
+    <div id="surprise-overlay" class="surprise-overlay" onclick="openSurprise(event)">
         <h1 class="surprise-title">✨ A Special Surprise For You! ✨</h1>
         <p class="surprise-subtitle">To the most wonderful, loving, and incredible sister in the universe</p>
 
         <!-- 3D Interactive Wobbling Gift Box -->
-        <div id="gift-box-btn" class="gift-box-wrapper" title="Tap to Open Your Birthday Surprise!">
+        <div id="gift-box-btn" class="gift-box-wrapper" role="button" tabindex="0" onclick="openSurprise(event)" aria-label="Tap to Open Your Birthday Surprise" title="Tap to Open Your Birthday Surprise!">
             <div class="gift-box">
                 <div class="gift-ribbon-v"></div>
                 <div class="gift-ribbon-h"></div>
@@ -52,15 +52,15 @@
             </div>
         </div>
 
-        <div class="tap-to-open-badge">
+        <button id="tap-to-open-btn" class="tap-to-open-badge" onclick="openSurprise(event)" type="button" aria-label="Tap Gift to Open Surprise">
             <span>🎁 Tap Gift to Open Surprise! 🌟</span>
-        </div>
+        </button>
     </div>
 
-    <!-- ===================================================================
-         FLOATING HUD CONTROLS
-         =================================================================== -->
+    <!-- FLOATING HUD CONTROLS -->
     <aside class="hud-controls" aria-label="Celebration Controls">
+        <button id="btn-replay-tour" class="hud-btn" title="Replay Story Tour"
+            aria-label="Replay Tour">🎬</button>
         <button id="btn-music-toggle" class="hud-btn" title="Toggle Birthday Melody"
             aria-label="Toggle Music">🎵</button>
         <button id="btn-confetti-blast" class="hud-btn" title="Burst Confetti Cannon"
@@ -77,7 +77,7 @@
     <main class="main-wrapper">
 
         <!-- HERO SECTION -->
-        <header class="hero-section">
+        <header class="hero-section" id="hero-section">
             <div class="hero-badge">👑 Happy Birthday My Dear Sister 👑</div>
             <h1 class="hero-title">
                 Happy Birthday
@@ -183,7 +183,7 @@
         </section>
 
         <!-- SISTER APPRECIATION & MEMORY DECK -->
-        <section class="glass-card" aria-labelledby="memories-heading">
+        <section class="glass-card" id="memories-section" aria-labelledby="memories-heading">
             <div class="section-header">
                 <h2 id="memories-heading">Why You Are The <span>Best Sister</span> in the World 💖</h2>
                 <p>Hover or tap on each Polaroid to celebrate your superpower moments!</p>
@@ -193,8 +193,8 @@
                 <!-- Card 1 -->
                 <article class="polaroid-card">
                     <div class="polaroid-img-wrap">
-                        <img id="polaroid-img-1" class="polaroid-img" src="assets/card1.jpg" alt="Purest Heart Didi"
-                            loading="lazy">
+                        <img id="polaroid-img-1" class="polaroid-img" src="assets/card1.jpg" alt="Purest Heart Priyanka Didi"
+                            loading="eager" decoding="async">
                         <span class="polaroid-badge">Pure Gold ✨</span>
                     </div>
                     <div class="polaroid-caption">The Purest Heart</div>
@@ -204,7 +204,8 @@
                 <!-- Card 2 -->
                 <article class="polaroid-card">
                     <div class="polaroid-img-wrap">
-                        <img class="polaroid-img" src="assets/card2.jpg" alt="Partner in Crime" loading="lazy">
+                        <img class="polaroid-img" src="assets/card2.jpg" alt="Partner in Crime"
+                            loading="eager" decoding="async">
                         <span class="polaroid-badge">Best Friend 🎈</span>
                     </div>
                     <div class="polaroid-caption">Partner in Crime</div>
@@ -214,7 +215,8 @@
                 <!-- Card 3 -->
                 <article class="polaroid-card">
                     <div class="polaroid-img-wrap">
-                        <img class="polaroid-img" src="assets/card3.jpg" alt="My Guiding Light" loading="lazy">
+                        <img class="polaroid-img" src="assets/card3.jpg" alt="My Guiding Light"
+                            loading="eager" decoding="async">
                         <span class="polaroid-badge">Advisor 💡</span>
                     </div>
                     <div class="polaroid-caption">My Guiding Light</div>
@@ -224,7 +226,8 @@
                 <!-- Card 4 -->
                 <article class="polaroid-card">
                     <div class="polaroid-img-wrap">
-                        <img class="polaroid-img" src="assets/card4.jpg" alt="Birthday Queen" loading="lazy">
+                        <img class="polaroid-img" src="assets/card4.jpg" alt="Birthday Queen"
+                            loading="eager" decoding="async">
                         <span class="polaroid-badge">Queen 👑</span>
                     </div>
                     <div class="polaroid-caption">The Birthday Queen</div>
@@ -234,7 +237,7 @@
         </section>
 
         <!-- WISHING STAR BUBBLES / BLESSINGS JAR -->
-        <section class="glass-card" aria-labelledby="wishes-jar-heading">
+        <section class="glass-card" id="wishes-jar-section" aria-labelledby="wishes-jar-heading">
             <div class="section-header">
                 <h2 id="wishes-jar-heading">Pick a <span>Magical Star</span> for a Blessing ⭐</h2>
                 <p>Tap each star bubble to reveal special birthday blessings for you!</p>
@@ -255,7 +258,7 @@
         </section>
 
         <!-- ROYAL GOLDEN PARCHMENT BIRTHDAY LETTER -->
-        <section class="glass-card" aria-labelledby="letter-heading">
+        <section class="glass-card" id="letter-section" aria-labelledby="letter-heading">
             <div class="section-header">
                 <h2 id="letter-heading">A Heartfelt <span>Letter</span> for You 💌</h2>
                 <p>Words straight from the heart to celebrate your special day.</p>
@@ -288,7 +291,7 @@
 
                 <div class="letter-signature">
                     With endless love & respect,<br>
-                    <span class="letter-sender js-sender-name">Your Loving Brother</span>
+                    <span class="letter-sender js-sender-name">Your Loving Brother Rahul</span>
                 </div>
 
                 <div class="wax-seal" title="Sealed with Love">❤️</div>
@@ -296,7 +299,7 @@
         </section>
 
         <!-- LUXURY CELEBRATION FOOTER -->
-        <footer class="celebration-footer" aria-label="Celebration Footer">
+        <footer class="celebration-footer" id="footer-section" aria-label="Celebration Footer">
             <div class="footer-glow-line"></div>
             <div class="footer-content">
                 <div class="footer-heart-badge">

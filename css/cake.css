@@ -1,0 +1,344 @@
+/* 3D Birthday Cake, Candles, Flames & Cutting Ceremony Styles */
+
+.cake-container {
+    position: relative;
+    width: 280px;
+    height: 250px;
+    margin: 20px auto 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    perspective: 800px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+/* Cake Plate */
+.cake-plate {
+    position: absolute;
+    bottom: -15px;
+    width: 300px;
+    max-width: 92vw;
+    height: 22px;
+    background: radial-gradient(ellipse at center, #ffffff 0%, #e0e0e0 70%, #bdbdbd 100%);
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    z-index: 1;
+}
+
+/* Cake Layers */
+.cake {
+    position: relative;
+    width: 240px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 2;
+    transition: transform 0.4s ease;
+}
+
+.cake-layer {
+    position: relative;
+    border-radius: 14px 14px 8px 8px;
+    box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.15), 0 6px 15px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Layer 1 - Bottom */
+.layer-bottom {
+    width: 240px;
+    height: 65px;
+    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 50%, #ff4d6d 100%);
+    z-index: 2;
+}
+
+/* Layer 2 - Middle */
+.layer-middle {
+    width: 190px;
+    height: 55px;
+    background: linear-gradient(135deg, #ffd166 0%, #ffeaa7 50%, #f4a261 100%);
+    z-index: 3;
+    margin-bottom: -4px;
+}
+
+/* Layer 3 - Top */
+.layer-top {
+    width: 140px;
+    height: 48px;
+    background: linear-gradient(135deg, #ff99c8 0%, #fcf6bd 50%, #ff85a1 100%);
+    z-index: 4;
+    margin-bottom: -4px;
+}
+
+/* Layer Frosting Drips */
+.frosting {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 12px 12px 10px 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.frosting-drips {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.drip {
+    width: 12px;
+    height: 14px;
+    background: #ffffff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.08);
+}
+.drip:nth-child(2n) { height: 18px; width: 10px; }
+.drip:nth-child(3n) { height: 11px; width: 14px; }
+
+/* Cream rosettes & cherries */
+.toppings {
+    position: absolute;
+    bottom: 154px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-around;
+    width: 120px;
+    z-index: 5;
+}
+
+.cherry {
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle at 35% 35%, #ff4d6d 0%, #c9184a 70%, #590d22 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.cherry::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 4px;
+    width: 6px;
+    height: 8px;
+    border-right: 2px solid #52b788;
+    border-top: 2px solid #52b788;
+    border-radius: 0 8px 0 0;
+}
+
+/* Candles */
+.candles-wrap {
+    position: absolute;
+    bottom: 162px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    z-index: 6;
+}
+
+.candle {
+    position: relative;
+    width: 10px;
+    height: 38px;
+    background: repeating-linear-gradient(
+        45deg,
+        #ffd166,
+        #ffd166 6px,
+        #ff477e 6px,
+        #ff477e 12px
+    );
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.candle-wick {
+    position: absolute;
+    top: -6px;
+    left: 4px;
+    width: 2px;
+    height: 6px;
+    background: #333333;
+    border-radius: 1px;
+}
+
+/* Candle Flame */
+.flame {
+    position: absolute;
+    top: -24px;
+    left: -3px;
+    width: 16px;
+    height: 24px;
+    background: radial-gradient(ellipse at bottom, #ffd166 0%, #ff9e00 50%, #ff4800 85%, transparent 100%);
+    border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+    box-shadow: 0 0 16px #ffbe0b, 0 0 30px #fb5607;
+    animation: flameFlicker 0.6s infinite alternate ease-in-out;
+    transform-origin: center bottom;
+    transition: all 0.3s ease;
+}
+
+@keyframes flameFlicker {
+    0% {
+        transform: scale(1) rotate(-2deg);
+        box-shadow: 0 0 14px #ffbe0b, 0 0 24px #fb5607;
+    }
+    50% {
+        transform: scale(1.08, 0.95) rotate(3deg);
+        box-shadow: 0 0 18px #ffd166, 0 0 32px #ff0054;
+    }
+    100% {
+        transform: scale(0.96, 1.05) rotate(-3deg);
+        box-shadow: 0 0 12px #ffbe0b, 0 0 22px #fb5607;
+    }
+}
+
+/* Extinguished Candle State */
+.flame.extinguished {
+    opacity: 0;
+    transform: scale(0.1);
+    pointer-events: none;
+}
+
+/* Smoke effect on blow */
+.smoke {
+    position: absolute;
+    top: -22px;
+    left: 1px;
+    width: 8px;
+    height: 8px;
+    background: rgba(220, 220, 220, 0.7);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.smoke.active {
+    animation: smokeRise 1.6s forwards ease-out;
+}
+
+@keyframes smokeRise {
+    0% {
+        opacity: 0.8;
+        transform: translate(0, 0) scale(0.6);
+        filter: blur(1px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translate(-8px, -24px) scale(2.2);
+        filter: blur(4px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(14px, -55px) scale(3.5);
+        filter: blur(8px);
+    }
+}
+
+/* Cake Cutting Slice Animation */
+.cake-slice-cut {
+    position: absolute;
+    right: 40px;
+    bottom: 0;
+    width: 50px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.2);
+    border-left: 2px dashed rgba(255, 255, 255, 0.8);
+    transform-origin: center right;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.cake.is-cut .cake-slice-cut {
+    opacity: 1;
+    transform: translateX(18px) rotate(8deg);
+}
+
+/* Cake Action Buttons & Guide */
+.cake-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+    width: 100%;
+}
+
+.cake-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    min-height: 46px;
+    background: linear-gradient(135deg, #ff4d6d, #c9184a);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(201, 24, 74, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cake-btn:hover,
+.cake-btn:active {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 7px 20px rgba(201, 24, 74, 0.6);
+}
+
+.cake-btn.gold {
+    background: linear-gradient(135deg, #ffd166, #ffb703);
+    color: #331800;
+    box-shadow: 0 4px 15px rgba(255, 183, 3, 0.4);
+}
+
+.cake-btn.gold:hover,
+.cake-btn.gold:active {
+    box-shadow: 0 7px 20px rgba(255, 183, 3, 0.6);
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES FOR CAKE
+   ========================================================================== */
+@media (max-width: 480px) {
+    .cake-container {
+        transform: scale(0.92);
+        margin: 10px auto 20px auto;
+    }
+    .cake-controls {
+        gap: 10px;
+    }
+    .cake-btn {
+        width: 100%;
+        max-width: 280px;
+        font-size: 0.92rem;
+        padding: 12px 18px;
+    }
+}
+
+@media (max-width: 360px) {
+    .cake-container {
+        transform: scale(0.82);
+        margin: 5px auto 15px auto;
+    }
+}

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Dearest Priyanka Didi! 👑🎉 | A Special Surprise For You</title>
+
+    <!-- SEO & Social Sharing Meta Tags (Rich WhatsApp / Messenger Previews) -->
+    <meta name="description"
+        content="A magical, interactive birthday surprise celebration created with love for the best Didi in the world!">
+    <meta name="theme-color" content="#2b0938">
+    <meta property="og:title" content="Happy Birthday Dearest Didi! 👑✨">
+    <meta property="og:description"
+        content="Open this special celebration link to reveal your birthday surprise, music, cake, fireworks, and heartfelt memories!">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/card1.jpg">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cake.css">
+</head>
+
+<body>
+
+    <!-- Ambient Visual Glow Effects -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Visual HTML5 Canvases for Fireworks & Physics Confetti -->
+    <canvas id="fireworks-canvas"></canvas>
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- ===================================================================
+         SCENE 0: SURPRISE UNBOXING ENTRANCE OVERLAY
+         =================================================================== -->
+    <div id="surprise-overlay" class="surprise-overlay">
+        <h1 class="surprise-title">✨ A Special Surprise For You! ✨</h1>
+        <p class="surprise-subtitle">To the most wonderful, loving, and incredible sister in the universe</p>
+
+        <!-- 3D Interactive Wobbling Gift Box -->
+        <div id="gift-box-btn" class="gift-box-wrapper" title="Tap to Open Your Birthday Surprise!">
+            <div class="gift-box">
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+                <div class="gift-bow">
+                    <div class="bow-loop left"></div>
+                    <div class="bow-loop right"></div>
+                    <div class="bow-knot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tap-to-open-badge">
+            <span>🎁 Tap Gift to Open Surprise! 🌟</span>
+        </div>
+    </div>
+
+    <!-- ===================================================================
+         FLOATING HUD CONTROLS
+         =================================================================== -->
+    <aside class="hud-controls" aria-label="Celebration Controls">
+        <button id="btn-music-toggle" class="hud-btn" title="Toggle Birthday Melody"
+            aria-label="Toggle Music">🎵</button>
+        <button id="btn-confetti-blast" class="hud-btn" title="Burst Confetti Cannon"
+            aria-label="Confetti Cannon">🎉</button>
+        <button id="btn-fireworks-toggle" class="hud-btn" title="Launch Fireworks Show"
+            aria-label="Fireworks Show">🎆</button>
+        <button id="btn-open-customizer" class="hud-btn" title="Personalize & Share"
+            aria-label="Personalize Settings">⚙️</button>
+    </aside>
+
+    <!-- ===================================================================
+         MAIN CELEBRATION EXPERIENCE
+         =================================================================== -->
+    <main class="main-wrapper">
+
+        <!-- HERO SECTION -->
+        <header class="hero-section">
+            <div class="hero-badge">👑 Happy Birthday My Dear Sister 👑</div>
+            <h1 class="hero-title">
+                Happy Birthday
+                <span class="hero-didi-name js-didi-name">My Dear Priyanka Didi</span>
+            </h1>
+            <p class="hero-tagline">
+                Today is all about celebrating your radiant smile, your endless warmth, and the immense happiness you
+                bring into our lives every single day! ✨
+            </p>
+        </header>
+
+        <!-- 3D CAKE & CANDLE CEREMONY CARD -->
+        <section class="glass-card" id="cake-station" aria-labelledby="cake-heading">
+            <div class="section-header">
+                <h2 id="cake-heading">Make a <span>Wish</span> & Cut the <span>Cake</span> 🎂</h2>
+                <p id="cake-status-msg">✨ Tap the candles to blow them out, or click the buttons below!</p>
+            </div>
+
+            <!-- 3D Layered Cake Component -->
+            <div class="cake-container" id="birthday-cake" title="Click to blow candles or cut cake!">
+                <div class="cake-plate"></div>
+                <div class="cake">
+                    <!-- Layer 3 (Top) -->
+                    <div class="cake-layer layer-top">
+                        <div class="frosting"></div>
+                        <div class="frosting-drips">
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                        </div>
+                    </div>
+                    <!-- Layer 2 (Middle) -->
+                    <div class="cake-layer layer-middle">
+                        <div class="frosting"></div>
+                        <div class="frosting-drips">
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                        </div>
+                    </div>
+                    <!-- Layer 1 (Bottom) -->
+                    <div class="cake-layer layer-bottom">
+                        <div class="frosting"></div>
+                        <div class="frosting-drips">
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                            <div class="drip"></div>
+                        </div>
+                    </div>
+
+                    <!-- Cut Slice Effect -->
+                    <div class="cake-slice-cut"></div>
+                </div>
+
+                <!-- Cherries / Rosettes -->
+                <div class="toppings">
+                    <div class="cherry"></div>
+                    <div class="cherry"></div>
+                    <div class="cherry"></div>
+                </div>
+
+                <!-- Flickering Candles & Smoke -->
+                <div class="candles-wrap">
+                    <div class="candle">
+                        <div class="candle-wick"></div>
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="candle-wick"></div>
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="candle-wick"></div>
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cake Interaction Controls -->
+            <div class="cake-controls">
+                <button id="btn-blow-candles" class="cake-btn">
+                    <span>💨 Blow Out Candles</span>
+                </button>
+                <button id="btn-cut-cake" class="cake-btn gold" style="display: none;">
+                    <span>🍰 Cut the Cake</span>
+                </button>
+                <button id="btn-relight-candles" class="cake-btn" style="display: none;">
+                    <span>🔥 Relight Candles</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SISTER APPRECIATION & MEMORY DECK -->
+        <section class="glass-card" aria-labelledby="memories-heading">
+            <div class="section-header">
+                <h2 id="memories-heading">Why You Are The <span>Best Sister</span> in the World 💖</h2>
+                <p>Hover or tap on each Polaroid to celebrate your superpower moments!</p>
+            </div>
+
+            <div class="memories-grid">
+                <!-- Card 1 -->
+                <article class="polaroid-card">
+                    <div class="polaroid-img-wrap">
+                        <img id="polaroid-img-1" class="polaroid-img" src="assets/card1.jpg" alt="Purest Heart Didi"
+                            loading="lazy">
+                        <span class="polaroid-badge">Pure Gold ✨</span>
+                    </div>
+                    <div class="polaroid-caption">The Purest Heart</div>
+                    <p class="polaroid-desc">Your kindness and warmth light up everyone around you.</p>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="polaroid-card">
+                    <div class="polaroid-img-wrap">
+                        <img class="polaroid-img" src="assets/card2.jpg" alt="Partner in Crime" loading="lazy">
+                        <span class="polaroid-badge">Best Friend 🎈</span>
+                    </div>
+                    <div class="polaroid-caption">Partner in Crime</div>
+                    <p class="polaroid-desc">From our funniest secrets to late night laugh sessions.</p>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="polaroid-card">
+                    <div class="polaroid-img-wrap">
+                        <img class="polaroid-img" src="assets/card3.jpg" alt="My Guiding Light" loading="lazy">
+                        <span class="polaroid-badge">Advisor 💡</span>
+                    </div>
+                    <div class="polaroid-caption">My Guiding Light</div>
+                    <p class="polaroid-desc">Always giving the best life advice and having my back.</p>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="polaroid-card">
+                    <div class="polaroid-img-wrap">
+                        <img class="polaroid-img" src="assets/card4.jpg" alt="Birthday Queen" loading="lazy">
+                        <span class="polaroid-badge">Queen 👑</span>
+                    </div>
+                    <div class="polaroid-caption">The Birthday Queen</div>
+                    <p class="polaroid-desc">May this year bring unlimited shopping, travel & joy!</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- WISHING STAR BUBBLES / BLESSINGS JAR -->
+        <section class="glass-card" aria-labelledby="wishes-jar-heading">
+            <div class="section-header">
+                <h2 id="wishes-jar-heading">Pick a <span>Magical Star</span> for a Blessing ⭐</h2>
+                <p>Tap each star bubble to reveal special birthday blessings for you!</p>
+            </div>
+
+            <div class="wishing-stars-grid">
+                <button class="star-bubble" type="button">⭐ Joy & Laughter</button>
+                <button class="star-bubble" type="button">💎 Success & Prosperity</button>
+                <button class="star-bubble" type="button">🛍️ Unlimited Shopping</button>
+                <button class="star-bubble" type="button">💖 Endless Love & Hugs</button>
+                <button class="star-bubble" type="button">🌈 Secret Wishes Fulfilled</button>
+                <button class="star-bubble" type="button">👑 Queen Energy Always</button>
+            </div>
+
+            <div id="wish-reveal-box" class="wish-reveal-box">
+                <span>✨ Tap any star bubble above to uncover a heartfelt wish! ✨</span>
+            </div>
+        </section>
+
+        <!-- ROYAL GOLDEN PARCHMENT BIRTHDAY LETTER -->
+        <section class="glass-card" aria-labelledby="letter-heading">
+            <div class="section-header">
+                <h2 id="letter-heading">A Heartfelt <span>Letter</span> for You 💌</h2>
+                <p>Words straight from the heart to celebrate your special day.</p>
+            </div>
+
+            <div class="letter-wrapper">
+                <div class="letter-corner-decor letter-tl"></div>
+                <div class="letter-corner-decor letter-tr"></div>
+                <div class="letter-corner-decor letter-bl"></div>
+                <div class="letter-corner-decor letter-br"></div>
+
+                <h3 class="letter-heading">To My Dearest Didi</h3>
+                <div id="letter-salutation-text" class="letter-salutation">Dearest Priyanka Didi,</div>
+
+                <div id="letter-body-text" class="letter-body">
+                    <p>
+                        Having you as my elder sister is one of the greatest blessings of my life. From shielding me
+                        when I made mistakes, to celebrating my tiniest victories, you have been my guardian angel, my
+                        advisor, and my forever best friend.
+                    </p>
+                    <p>
+                        Thank you for your infinite patience, your warm hugs, your infectious laughter, and for always
+                        inspiring me to be a better person. On your birthday, I wish that you achieve every single
+                        milestone you dream of, stay in supreme health, and find happiness in every moment!
+                    </p>
+                    <p>
+                        Happy Birthday to the most amazing Didi in the universe! 💖✨
+                    </p>
+                </div>
+
+                <div class="letter-signature">
+                    With endless love & respect,<br>
+                    <span class="letter-sender js-sender-name">Your Loving Brother</span>
+                </div>
+
+                <div class="wax-seal" title="Sealed with Love">❤️</div>
+            </div>
+        </section>
+
+        <!-- LUXURY CELEBRATION FOOTER -->
+        <footer class="celebration-footer" aria-label="Celebration Footer">
+            <div class="footer-glow-line"></div>
+            <div class="footer-content">
+                <div class="footer-heart-badge">
+                    <span>🌸 Made with all the love in the world for <strong class="js-didi-name">Priyanka Didi</strong> 🌸</span>
+                </div>
+                <div class="footer-credit">
+                    Crafted with <span class="heart-beat">❤️</span> by <strong class="footer-author">Rahul</strong>
+                </div>
+                <p class="footer-wishes-cheer">✨ Happy Birthday Didi! Wishing you infinite joy, laughter & blessings! 🎉</p>
+                <p class="footer-balloon-hint">🎈 Tap or click the floating balloons for surprise sparkles!</p>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 A Special Birthday Surprise For You. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ===================================================================
+         PERSONALIZATION & SHARING MODAL
+         =================================================================== -->
+    <div id="customizer-modal" class="customizer-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="customizer-content">
+            <div class="customizer-header">
+                <h3 id="modal-title">⚙️ Personalize Birthday Page</h3>
+                <button id="btn-close-customizer" class="close-btn" aria-label="Close modal">&times;</button>
+            </div>
+
+            <form id="customizer-form">
+                <div class="form-group">
+                    <label for="input-didi-name">Sister's Name / Nickname:</label>
+                    <input type="text" id="input-didi-name" class="form-control" placeholder="e.g. Priyanka Didi">
+                </div>
+
+                <div class="form-group">
+                    <label for="input-sender-name">Your Name / Title:</label>
+                    <input type="text" id="input-sender-name" class="form-control"
+                        placeholder="e.g. Rahul">
+                </div>
+
+                <div class="form-group">
+                    <label for="input-birthday-msg">Custom Birthday Letter / Message:</label>
+                    <textarea id="input-birthday-msg" class="form-control" rows="4"
+                        placeholder="Write your personalized heartfelt message here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-custom-photo">Upload Custom Photo for Card 1 (Optional):</label>
+                    <input type="file" id="input-custom-photo" class="form-control" accept="image/*">
+                </div>
+
+                <button type="submit" class="btn-primary-action">✨ Save & Update Page</button>
+            </form>
+
+            <div class="share-link-box">
+                <button id="btn-copy-link" class="btn-primary-action"
+                    style="background: linear-gradient(135deg, #ffd166, #ff9e00); color: #1a052e;">
+                    Copy Shareable Link 🔗
+                </button>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; text-align: center;">
+                Copy and send the customized link to Didi on WhatsApp or Instagram!
+            </p>
+        </div>
+    </div>
+
+    <!-- Core JavaScript Libraries -->
+    <script src="js/audio.js"></script>
+    <script src="js/confetti.js"></script>
+    <script src="js/fireworks.js"></script>
+    <script src="js/customizer.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

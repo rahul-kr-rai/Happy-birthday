@@ -59,8 +59,6 @@
 
     <!-- FLOATING HUD CONTROLS -->
     <aside class="hud-controls" aria-label="Celebration Controls">
-        <button id="btn-replay-tour" class="hud-btn" title="Replay Story Tour"
-            aria-label="Replay Tour">🎬</button>
         <button id="btn-music-toggle" class="hud-btn" title="Toggle Birthday Melody"
             aria-label="Toggle Music">🎵</button>
         <button id="btn-confetti-blast" class="hud-btn" title="Burst Confetti Cannon"
@@ -96,9 +94,17 @@
                 <p id="cake-status-msg">✨ Tap the candles to blow them out, or click the buttons below!</p>
             </div>
 
-            <!-- 3D Layered Cake Component -->
+            <!-- 3D Layered Cake Component with Realistic Cutting Slice -->
             <div class="cake-container" id="birthday-cake" title="Click to blow candles or cut cake!">
                 <div class="cake-plate"></div>
+
+                <!-- Ceremonial Cutting Knife -->
+                <div class="cutting-knife" id="cutting-knife">
+                    <div class="knife-blade"></div>
+                    <div class="knife-handle"></div>
+                </div>
+
+                <!-- Main Cake Body -->
                 <div class="cake">
                     <!-- Layer 3 (Top) -->
                     <div class="cake-layer layer-top">
@@ -137,11 +143,15 @@
                         </div>
                     </div>
 
-                    <!-- Cut Slice Effect -->
-                    <div class="cake-slice-cut"></div>
+                    <!-- Cut Interior Notch Texture -->
+                    <div class="cake-cut-notch">
+                        <div class="notch-layer notch-top"></div>
+                        <div class="notch-layer notch-mid"></div>
+                        <div class="notch-layer notch-bot"></div>
+                    </div>
                 </div>
 
-                <!-- Cherries / Rosettes -->
+                <!-- Cherries / Rosettes on Top of Cake -->
                 <div class="toppings">
                     <div class="cherry"></div>
                     <div class="cherry"></div>
@@ -164,6 +174,27 @@
                         <div class="candle-wick"></div>
                         <div class="flame"></div>
                         <div class="smoke"></div>
+                    </div>
+                </div>
+
+                <!-- Detached Realistic 3D Cake Slice & Dessert Plate -->
+                <div class="detached-slice-wrap" id="detached-slice-wrap">
+                    <div class="dessert-plate"></div>
+                    <div class="cut-slice-3d">
+                        <!-- Frosting on Top of Slice -->
+                        <div class="slice-frosting"></div>
+                        <!-- 3 Sponge Cake Layers inside Slice -->
+                        <div class="slice-sponge sponge-top"></div>
+                        <div class="slice-cream cream-1"></div>
+                        <div class="slice-sponge sponge-mid"></div>
+                        <div class="slice-cream cream-2"></div>
+                        <div class="slice-sponge sponge-bot"></div>
+                        <!-- Cherry on Slice -->
+                        <div class="slice-cherry"></div>
+                    </div>
+                    <!-- Slice Served Label -->
+                    <div class="slice-served-badge">
+                        <span>🍰 A Special Slice for Priyanka Didi! 💕</span>
                     </div>
                 </div>
             </div>

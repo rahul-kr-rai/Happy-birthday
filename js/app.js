@@ -187,11 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const wishesList = [
         "🌟 May your smile continue to brighten up every room you enter!",
+        "🧵 Happy Raksha Bandhan! May our brother-sister bond stay blessed with infinite love, trust, and happiness forever!",
         "💎 Wishing you a year packed with success, good health, and abundant prosperity!",
         "🛍️ May you get unlimited shopping sprees and all your favorite dresses!",
         "💖 Thank you for being my constant protector, best advisor, and favorite person!",
-        "🌈 May all your dreams and secret prayers come true this year!",
-        "✨ Always remember: You are the coolest, most beautiful, and inspiring Didi ever!"
+        "👑 Queen Energy Always: You are the coolest, most beautiful, and inspiring Didi ever!"
     ];
 
     function activateStarWish(index) {
@@ -215,6 +215,36 @@ document.addEventListener('DOMContentLoaded', () => {
     starBubbles.forEach((bubble, index) => {
         bubble.addEventListener('click', () => activateStarWish(index));
     });
+
+    // =========================================================================
+    // RAKSHA BANDHAN INTERACTIVE CEREMONY
+    // =========================================================================
+    const btnVirtualRakhi = document.getElementById('btn-virtual-rakhi');
+    const rakhiBlessingBox = document.getElementById('rakhi-blessing-box');
+
+    if (btnVirtualRakhi) {
+        btnVirtualRakhi.addEventListener('click', () => {
+            if (window.birthdayAudio) {
+                window.birthdayAudio.playFanfare();
+            }
+
+            if (window.confettiEngine) {
+                const rect = btnVirtualRakhi.getBoundingClientRect();
+                window.confettiEngine.burst(rect.left + rect.width / 2, rect.top, 120);
+                setTimeout(() => {
+                    window.confettiEngine.burst(window.innerWidth / 2, window.innerHeight * 0.4, 80);
+                }, 300);
+            }
+
+            if (rakhiBlessingBox) {
+                rakhiBlessingBox.style.display = 'block';
+                rakhiBlessingBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            btnVirtualRakhi.innerHTML = '<span>✨ Rakhi Blessing Sent with Love! 🌸</span>';
+            btnVirtualRakhi.disabled = true;
+        });
+    }
 
     // =========================================================================
     // SURPRISE UNBOXING LISTENERS

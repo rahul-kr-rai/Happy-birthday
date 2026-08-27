@@ -1028,7 +1028,192 @@ textarea.form-control {
         padding: 18px 12px;
         border-radius: 14px;
     }
-    .star-bubble {
-        flex: 1 1 100%;
-    }
+}
+
+/* ==========================================================================
+   RAKSHA BANDHAN SPECIAL CEREMONY STYLES
+   ========================================================================== */
+.rakhi-section {
+    background: radial-gradient(circle at top right, rgba(255, 153, 0, 0.12), transparent 70%),
+                radial-gradient(circle at bottom left, rgba(255, 0, 128, 0.12), transparent 70%),
+                rgba(25, 10, 45, 0.75);
+    border: 1px solid rgba(255, 209, 102, 0.35);
+    box-shadow: 0 12px 35px rgba(255, 170, 0, 0.15);
+}
+
+.rakhi-festive-tag {
+    display: inline-block;
+    padding: 5px 16px;
+    background: linear-gradient(135deg, rgba(255, 170, 0, 0.25), rgba(255, 0, 100, 0.25));
+    border: 1px solid rgba(255, 209, 102, 0.5);
+    border-radius: 50px;
+    color: #ffd166;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* 3D Auspicious Glowing Rakhi */
+.rakhi-display-container {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 110px;
+    margin: 20px auto 25px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rakhiFloat 3s infinite ease-in-out;
+}
+
+@keyframes rakhiFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Sacred Mauli Silk Threads */
+.rakhi-thread-left,
+.rakhi-thread-right {
+    flex: 1;
+    height: 6px;
+    background: repeating-linear-gradient(90deg, #ff0044, #ff0044 10px, #ffd700 10px, #ffd700 20px, #ff4500 20px, #ff4500 30px);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.rakhi-thread-left {
+    mask-image: linear-gradient(to right, transparent, black 40%);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
+}
+
+.rakhi-thread-right {
+    mask-image: linear-gradient(to left, transparent, black 40%);
+    -webkit-mask-image: linear-gradient(to left, transparent, black 40%);
+}
+
+/* Rakhi Centerpiece */
+.rakhi-centerpiece {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px;
+    z-index: 5;
+}
+
+.rakhi-outer-petals {
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    background: conic-gradient(from 0deg, #ffb703, #e63946, #ffb703, #e63946, #ffb703, #e63946, #ffb703, #e63946, #ffb703);
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(255, 183, 3, 0.7);
+    animation: rotateRakhiPetals 18s linear infinite;
+}
+
+@keyframes rotateRakhiPetals {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.rakhi-inner-ring {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, #ffffff 15%, #ffd166 60%, #c9184a 100%);
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rakhi-gem {
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle at 35% 35%, #ff4d6d 0%, #a00030 70%, #500015 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(255, 77, 109, 0.9), inset 0 2px 4px #ffffff;
+    border: 1px solid #ffd166;
+}
+
+/* Rakhi Beads */
+.rakhi-bead {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ffd700 70%, #b8860b 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+}
+
+.rakhi-bead.left-1 { left: -14px; }
+.rakhi-bead.left-2 { left: -26px; width: 10px; height: 10px; }
+.rakhi-bead.right-1 { right: -14px; }
+.rakhi-bead.right-2 { right: -26px; width: 10px; height: 10px; }
+
+/* Rakhi Message Card */
+.rakhi-message-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 209, 102, 0.25);
+    border-radius: 16px;
+    padding: 22px 20px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.rakhi-quote-icon {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+}
+
+.rakhi-message-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.15rem, 3.8vw, 1.45rem);
+    color: #ffd166;
+    margin-bottom: 12px;
+}
+
+.rakhi-message-body {
+    font-size: clamp(0.92rem, 2.8vw, 1.05rem);
+    line-height: 1.65;
+    color: #f0e6f6;
+    margin-bottom: 16px;
+}
+
+.rakhi-signature {
+    font-size: 0.95rem;
+    color: #ff99c8;
+    margin-bottom: 20px;
+}
+
+.rakhi-signature strong {
+    color: #ffffff;
+    font-size: 1.05rem;
+}
+
+.rakhi-interactive-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.rakhi-blessing-box {
+    width: 100%;
+    max-width: 500px;
+    background: linear-gradient(135deg, rgba(255, 209, 102, 0.15), rgba(255, 77, 109, 0.15));
+    border: 1px solid #ffd166;
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: #ffffff;
+    font-size: clamp(0.9rem, 2.8vw, 1rem);
+    line-height: 1.5;
+    box-shadow: 0 0 20px rgba(255, 209, 102, 0.3);
+    animation: fadeIn 0.5s ease;
 }

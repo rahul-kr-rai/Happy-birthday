@@ -4,7 +4,7 @@
 class BirthdayCustomizer {
     constructor() {
         this.defaults = {
-            didiName: 'Priyanka Didi',
+            didiName: 'My Dear Priyanka Didi',
             senderName: 'Your Loving Brother Rahul',
             birthdayWish: 'To the sweetest, most caring, and inspiring sister in the entire world. Thank you for always guiding me, supporting my dreams, making me laugh, and being my superhero. May this year bring you boundless happiness, peace, success, and all the love you deserve!',
             customLetterHeading: 'To My Dearest Priyanka Didi ❤️',
